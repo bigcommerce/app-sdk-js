@@ -1,7 +1,5 @@
-module.exports = {
-    init: init
-};
+import messageService from './PostMessage';
 
-function init() {
-    require('./PostMessage').init();
+export default function () {
+    messageService.init();
 }

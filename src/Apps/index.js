@@ -1,9 +1,10 @@
-module.exports = {
-    init: init
-};
+import checkIdle from './CheckIdle';
+import iframeUrlWatcher from './IframeUrlWatcher';
+import logoutNotifier from './LogoutNotifier';
 
-function init() {
-    require('./CheckIdle').init();
-    require('./IframeUrlWatcher').init();
-    require('./LogoutNotifier').init();
+export default function () {
+    // Load apps
+    checkIdle();
+    iframeUrlWatcher();
+    logoutNotifier();
 }

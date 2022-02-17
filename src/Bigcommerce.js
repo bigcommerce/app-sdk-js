@@ -1,22 +1,21 @@
-window.Bigcommerce = {
-    init: init
-};
+import appsInit from './Apps';
+import configService from './Common/config';
+import utilInit from './Utils';
 
 function init(options) {
     if (window.self === window.top) {
-        console.info('The Bigcommerce SDK-JS should not be loaded on page that is not within an iframe hosted in the Bigcommerce CP.');
-
-        return;
+        return console.info('The Bigcommerce SDK-JS should not be loaded on page that is not within an iframe hosted in the Bigcommerce CP.');
     }
 
-    var config = require('./Common/config');
-
-    config.set(options);
-
-    require('./Utils').init();
-    require('./Apps').init();
-    require('./API').init();
+    configService.set(options);
+    // Initialize apps and utilities
+    utilInit();
+    appsInit();
 }
+
+window.Bigcommerce = {
+    init: init
+};
 
 if (window.bcAsyncInit !== undefined) {
     window.bcAsyncInit();

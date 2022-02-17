@@ -1,20 +1,15 @@
-module.exports = {
-    init: init
-};
+import configService from '../../Common/config';
+import messageService from '../../Utils/PostMessage';
 
-function init() {
-    onLogoutSubscribe();
+export default function () {
+    const channel = messageService.getInstance();
+    const onLogout = configService.get('onLogout');
 
-    function onLogoutSubscribe() {
-        var channel = require('../../Utils/PostMessage').getInstance(),
-            onLogout = require('../../Common/config').get('onLogout');
-
-        if (typeof onLogout === 'function') {
-            channel.bind('logout', function onLogoutCallback() {
-                // Intentionally calling this function without params
-                // to avoid exposing the jschannel
-                onLogout();
-            });
-        }
+    if (typeof onLogout === 'function') {
+        channel.bind('logout', () => {
+            // Intentionally calling this function without params
+            // to avoid exposing the jschannel
+            onLogout();
+        });
     }
 }
