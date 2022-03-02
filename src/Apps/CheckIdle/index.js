@@ -1,16 +1,11 @@
+import messageService from '../../Utils/PostMessage';
 
-module.exports = {
-    init: init
-};
+export default function () {
+    const timerSeconds = 1000 * 60 * 5; // Every 5 mins
+    let timeoutInstance;
 
-function init() {
-    var timeoutInstance,
-        timerSeconds = 1e3 * 60 * 5; // Every 5 mins
-
-    checkIdle();
-
-    function handlePing() {
-        require('../../Utils/PostMessage').getInstance().notify({
+    const handlePing = () => {
+        messageService.getInstance().notify({
             method: 'iAmNotIdle'
         });
         document.removeEventListener('mousemove', handlePing);
@@ -18,12 +13,14 @@ function init() {
         // Clear out the current instance just in case it might have been triggered twice.
         clearTimeout(timeoutInstance);
         checkIdle();
-    }
+    };
 
-    function checkIdle() {
+    const checkIdle = () => {
         timeoutInstance = setTimeout(function checkIdleTimeout() {
             document.addEventListener('mousemove', handlePing);
             document.addEventListener('keydown', handlePing);
         }, timerSeconds);
-    }
+    };
+
+    checkIdle();
 }

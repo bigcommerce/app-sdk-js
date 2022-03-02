@@ -1,37 +1,32 @@
-var _ = require('lodash')._,
-    config = {
-        API: {},
-        Apps: {},
-        clientID: '',
-        onLogout: null,
-        postMessage: {}
-    };
+const defaultConfig = {
+    Apps: {},
+    clientID: '',
+    onLogout: null,
+    postMessage: {},
+};
 
-module.exports = {
-    set: function set(name, val) {
-        if (name === undefined) {
+class CommonConfig {
+    constructor(config) {
+        this.config = config;
+    }
+
+    set(name) {
+        if (typeof name === 'undefined' || typeof name !== 'object') {
             return;
         }
 
-        if (typeof name === 'object') {
-            config = _.assign(config, name);
-        } else {
-            var obj = config;
-            name = name.split('.');
-            while (name.length > 1) {
-                obj = config[name.shift()];
-            }
+        this.config = { ...this.config, ...name };
+    }
 
-            obj[name.shift()] = val;
-        }
-    },
-    get: function get(name) {
-        if (name === undefined) {
-            return config;
+    get(name) {
+        if (typeof name === 'undefined') {
+            return this.config;
         } else {
-            return name.split('.').reduce(function(c, x) {
-                return c[x];
-            }, config);
+            return name.split('.').reduce((c, x) => c[x], this.config);
         }
     }
-};
+}
+
+const configService = new CommonConfig(defaultConfig);
+
+export default configService;

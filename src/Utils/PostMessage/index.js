@@ -1,37 +1,40 @@
+import Channel from 'jschannel';
+import configService from '../../Common/config';
+
 /**
  * @overview This module uses JSChannel to create a connection between
  * itself and the parent window using postMessage.  We want to use it
  * as a singleton so that we only have one connection at any point in time.
  */
-var channel,
-    _ = require('lodash')._;
+class PostMessage {
+    channel;
 
-module.exports = {
-    init: init,
-    setInstance: setInstance,
-    getInstance: getInstance
-};
-
-function init() {
-    var defaultConfig = {
+    init() {
+        const defaultConfig = {
             window: parent.window,
             origin: '*',
-            scope: 'bc'
-        },
-        postMessageConfig = require('../../Common/config').get('postMessage'),
-        config = _.assign({}, defaultConfig, postMessageConfig);
+            scope: 'bc',
+        };
+        const postMessageConfig = configService.get('postMessage');
+        const config = { ...defaultConfig, ...postMessageConfig };
 
-    setInstance(require('jschannel').build(config));
-}
-
-function getInstance() {
-    if (! channel) {
-        throw new Error('postMessage needs to be initialized before it can be used.');
+        this.setInstance(Channel.build(config));
     }
 
-    return channel;
+    setInstance(channel) {
+        this.channel = channel;
+    }
+
+    getInstance() {
+        if (typeof this.channel === 'undefined') {
+            throw new Error('postMessage needs to be initialized before it can be used.');
+        }
+
+        return this.channel;
+    }
 }
 
-function setInstance(_channel) {
-    channel = _channel;
-}
+const messageService = new PostMessage();
+
+export default messageService;
+
