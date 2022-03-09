@@ -1,4 +1,5 @@
 import { wrap } from 'lodash';
+
 import messageService from '../../Utils/PostMessage';
 
 export default function () {
@@ -8,8 +9,8 @@ export default function () {
         method: 'iframeUrlChange',
         params: {
             href: window.location.href,
-            type: 'normal'
-        }
+            type: 'normal',
+        },
     });
 
     // Wrap pushState in iframe so we can put in a callback when it's updated
@@ -22,8 +23,8 @@ export default function () {
             method: 'iframeUrlChange',
             params: {
                 href: window.location.href,
-                type: 'pushState'
-            }
+                type: 'pushState',
+            },
         });
     });
 
@@ -33,22 +34,22 @@ export default function () {
             method: 'iframeUrlChange',
             params: {
                 href: window.location.href,
-                type: 'popState'
-            }
+                type: 'popState',
+            },
         });
     });
 
     // Hook into 'hashchange' so we can catch when the URL change just for IE and Edge
     const ua = navigator.userAgent;
-    const uamatch = ua.match(/(msie|trident|Edge(?=\/))\/?\s*([\d\.]+)/i);
-    if (uamatch?.[1] && ['msie','trident','edge'].indexOf(uamatch[1].toLowerCase()) !== -1) {
+    const uamatch = ua.match(/(msie|trident|Edge(?=\/))\/?\s*([\d.]+)/i);
+    if (uamatch?.[1] && ['msie', 'trident', 'edge'].indexOf(uamatch[1].toLowerCase()) !== -1) {
         window.addEventListener('hashchange', () => {
             channel.notify({
                 method: 'iframeUrlChange',
                 params: {
                     href: window.location.href,
-                    type: 'hashChange'
-                }
+                    type: 'hashChange',
+                },
             });
         });
     }

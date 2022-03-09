@@ -4,7 +4,10 @@ import utilInit from './Utils';
 
 function init(options) {
     if (window.self === window.top) {
-        return console.info('The Bigcommerce SDK-JS should not be loaded on page that is not within an iframe hosted in the Bigcommerce CP.');
+        // eslint-disable-next-line no-console
+        return console.info(
+            'The Bigcommerce SDK-JS should not be loaded on page that is not within an iframe hosted in the Bigcommerce CP.',
+        );
     }
 
     configService.set(options);
@@ -14,7 +17,7 @@ function init(options) {
 }
 
 window.Bigcommerce = {
-    init: init
+    init,
 };
 
 if (window.bcAsyncInit !== undefined) {
