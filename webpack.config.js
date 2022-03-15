@@ -1,5 +1,6 @@
-const webpack = require('webpack');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 const config = {
   entry: './src/Bigcommerce.js',
@@ -28,7 +29,10 @@ const config = {
       '.ts',
       '.js'
     ]
-  }
+  },
+  plugins: [
+    new LodashModuleReplacementPlugin
+  ]
 };
 
 module.exports = config;
