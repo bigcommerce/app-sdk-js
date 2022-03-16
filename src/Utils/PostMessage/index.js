@@ -1,14 +1,13 @@
 import Channel from 'jschannel';
+
 import configService from '../../Common/config';
 
 /**
- * @overview This module uses JSChannel to create a connection between
+ * This module uses JSChannel to create a connection between
  * itself and the parent window using postMessage.  We want to use it
  * as a singleton so that we only have one connection at any point in time.
  */
 class PostMessage {
-    channel;
-
     init() {
         const defaultConfig = {
             window: parent.window,
@@ -37,4 +36,3 @@ class PostMessage {
 const messageService = new PostMessage();
 
 export default messageService;
-

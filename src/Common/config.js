@@ -21,9 +21,9 @@ class CommonConfig {
     get(name) {
         if (typeof name === 'undefined') {
             return this.config;
-        } else {
-            return name.split('.').reduce((c, x) => c[x], this.config);
         }
+
+        return name.split('.').reduce((c, x) => c[x], this.config);
     }
 }
 
