@@ -42,4 +42,11 @@ module.exports = {
     'prettier/prettier': ['warn', { usePrettierrc: false }],
     'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true }],
   },
+  "overrides": [
+    {
+      "files": ['**/spec.js', '**/mocks/modules.js'],
+      "extends": ["plugin:jest/recommended"],
+      plugins: ['jest'],
+    },
+  ],
 };
