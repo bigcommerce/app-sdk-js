@@ -11,9 +11,7 @@ class CommonConfig {
     }
 
     set(name) {
-        if (typeof name === 'undefined' || typeof name !== 'object') {
-            return;
-        }
+        if (typeof name === 'undefined' || typeof name !== 'object') return;
 
         this.config = { ...this.config, ...name };
     }

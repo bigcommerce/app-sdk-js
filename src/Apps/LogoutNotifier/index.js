@@ -7,8 +7,7 @@ export default function () {
 
     if (typeof onLogout === 'function') {
         channel.bind('logout', () => {
-            // Intentionally calling this function without params
-            // to avoid exposing the jschannel
+            // Intentionally calling this function without params to avoid exposing the jschannel
             onLogout();
         });
     }
