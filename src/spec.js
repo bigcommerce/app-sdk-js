@@ -1,10 +1,10 @@
 import appsInit from './Apps';
 import './Bigcommerce';
-import utilInit from './Utils';
 import { mockIframeWindow, mockJschannel, resetWindowMock } from './mocks';
+import utilInit from './Utils';
 
-jest.mock("./Apps", () => ({ __esModule: true, default: jest.fn() }));
-jest.mock("./Utils", () => ({ __esModule: true, default: jest.fn() }));
+jest.mock('./Apps', () => ({ __esModule: true, default: jest.fn() }));
+jest.mock('./Utils', () => ({ __esModule: true, default: jest.fn() }));
 jest.mock('jschannel', () => mockJschannel);
 
 describe('Bigcommerce SDK', () => {
