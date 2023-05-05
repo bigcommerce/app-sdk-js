@@ -38,7 +38,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.5.1",
     "jschannel": "git+https://github.com/meenie/jschannel.git",
-    "lint-staged": "^12.3.5",
+    "lint-staged": "^13.2.1",
     "lodash-webpack-plugin": "^0.11.6",
     "prettier": "^2.5.1",
     "terser-webpack-plugin": "^5.3.1",
